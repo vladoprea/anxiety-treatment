@@ -2,15 +2,21 @@
 
 body {
     font-family: 'Nunito Sans', sans-serif;
+    color: #000;
 }
 
-/* Home page background */
+/* Background images and colors*/
 .home-bg {
     background-image: url(../images/background.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     height: 400px;
+}
+
+.footer-bg {
+    background-color: #7d7d7d;
+    height: 100px;
 }
 
 h2 {
