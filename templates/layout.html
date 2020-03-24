@@ -5,11 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anxiety</title>
+    <!-- Add css file link-->
+    <link rel="stylesheet" href="static/css/style.css">
+    <!-- Add bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 
 <body>
+
+    {% include 'includes/_navbar.html' %}
     {% block body %} {% endblock %}
+    {% include 'includes/_footer.html' %}
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </body>
