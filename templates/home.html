@@ -18,13 +18,13 @@
         </div>
     </section>
     <section class="container">
-        <div class="row definition">
+        <div class="row def-title">
             <div class="col text-center">
                 <h3>What is an anxiety disorder?</h3>
             </div>
         </div>
-        <div class="row ">
-            <div class="col def-paragraph">
+        <div class="row justify-content-center">
+            <div class="col-10 def-paragraph">
                 <p>Occasional anxiety is an expected part of life. You might feel anxious when faced with a problem at
                     work, before taking a test, or before making an important decision. But anxiety disorders involve
                     more than temporary worry or fear. For a person with an anxiety disorder, the anxiety does not go
@@ -35,7 +35,38 @@
                 </p>
             </div>
         </div>
+        <div class="row cardboards justify-content-between">
+            <div class="col-md-5 symptoms-card">
+                <img src="../static/images/symptoms.jpg" class="symptoms">
+                <h4>Symptoms</h4>
+                <p>
+                    Everyone feels anxious now and then. It’s a normal emotion. For example, you may feel nervous when
+                    faced
+                    with a problem at work, before taking a test, or before making an important decision.
+                </p>
+                <div class="row">
+                    <div class="col text-right">
+                        <button type="button" class="btn btn-outline-light"><a href="/symptoms.html" class="read-more"
+                                target="_blank">Read
+                                more<i class="fas fa-arrow-alt-circle-right"></i></a></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 treatment-card">
+                <img src="../static/images/treatment.jpg" class="treatment">
+                <h4>Treatment</h4>
+                <p>Treating a person with anxiety depends on the nature of the anxiety disorder and individual
+                    preferences. Often, treatment will combine different types of therapy and medication.
+                </p>
+                <div class="row">
+                    <div class="col text-right">
+                        <button type="button" class="btn btn-outline-light"><a href="/treatment.html" class="read-more"
+                                target="_blank">Read
+                                more<i class="fas fa-arrow-alt-circle-right"></i></a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 </main>
-
 {% endblock %}
