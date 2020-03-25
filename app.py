@@ -21,6 +21,16 @@ def home():
     return render_template('home.html')
 
 
+@app.route('/symptoms.html')
+def sym():
+    return render_template('symptoms.html')
+
+
+@app.route('/treatment.html')
+def treat():
+    return render_template('treatment.html')
+
+
 if __name__ == '__main__':
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get('PORT')),
