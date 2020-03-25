@@ -1,11 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans:400,500,600,700,800,900&display=swap');
 
+html,
 body {
-    font-family: 'Nunito Sans', sans-serif;
-    color: #000;
+    height: 100%;
 }
 
-/* Background images and colors*/
+body {
+    font-family: 'Nunito Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+/*    Background image    */
 .home-bg {
     background-image: url(../images/background.jpg);
     background-position: center;
@@ -14,11 +20,39 @@ body {
     height: 400px;
 }
 
-.footer-bg {
-    background-color: #7d7d7d;
-    height: 100px;
+/*       Images       */
+.symptoms {
+    margin-top: 10px;
+    height: 200px;
+    width: 100%;
 }
 
+.treatment {
+    margin-top: 10px;
+    height: 200px;
+    width: 100%;
+}
+
+/*   Cardboards with articles   */
+.cardboards {
+    margin-bottom: 50px;
+
+}
+
+.symptoms-card {
+    border-radius: 10px;
+    background-color: #fafbfb;
+    box-shadow: 10px 10px 5px #e2e2e2;
+}
+
+.treatment-card {
+    border-radius: 10px;
+    background-color: #fafbfb;
+    box-shadow: 10px 10px 5px #e2e2e2;
+}
+
+
+/*   Headings   */
 h2 {
     color: #fff;
 }
@@ -28,11 +62,37 @@ h2 {
     margin-bottom: 4rem;
 }
 
-.definition {
+/*    Paragraphs    */
+.def-title {
     margin-top: 40px;
 }
 
 .def-paragraph {
     margin-top: 30px;
     margin-bottom: 30px;
+}
+
+/*  Font awesome icons  */
+.fas {
+    font-weight: 500;
+    padding-left: 4px;
+}
+
+/*   Buttons    */
+.btn-outline-light {
+    color: #000;
+    border-color: #000;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+/*    Footer    */
+.footer {
+    background-color: #7d7d7d;
+    color: #000;
+    height: 100px;
+    flex-shrink: 0;
 }
