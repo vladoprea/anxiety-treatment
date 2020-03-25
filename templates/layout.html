@@ -7,14 +7,17 @@
     <title>Anxiety</title>
     <!-- Add css file link-->
     <link rel="stylesheet" href="static/css/style.css">
-    <!-- Add bootstrap -->
+    <!-- Add bootstrap, font awesome -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 </head>
 
 <body>
-
+    <!--Navigation-->
     {% include 'includes/_navbar.html' %}
+    <!--Main content-->
     {% block body %} {% endblock %}
+    <!--Footer-->
     {% include 'includes/_footer.html' %}
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
