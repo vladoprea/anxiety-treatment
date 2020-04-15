@@ -1,6 +1,7 @@
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, flash, request, url_for
+from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 import os
 from os import path
 if path.exists("env.py"):
