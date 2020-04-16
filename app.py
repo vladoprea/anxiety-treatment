@@ -39,15 +39,18 @@ class LoginForm(Form):
 @app.route('/')
 def home():
     if 'username' in session:
-        return render_template('home.html', name=session['username'])
+        return render_template('dashboard.html', name=session['username'])
     return render_template('home.html')
 
-@app.route('/symptoms.html')
+
+
+
+@app.route('/symptoms')
 def sym():
     return render_template('symptoms.html')
 
 
-@app.route('/treatment.html')
+@app.route('/treatment')
 def treat():
     return render_template('treatment.html')
 
@@ -87,12 +90,19 @@ def login():
         if user_login:
             if check_password_hash(user_login['password'], request.form["password"]):
                 session['username'] = request.form['username']
-                return redirect(url_for('home'))
+                return redirect(url_for('dashboard'))
+            return redirect(url_for('login'))
         
         flash('Username does not exist')
         return redirect(url_for('register'))
             
     return render_template('login.html', form=form)
+
+@app.route('/logout')
+def logout():
+    """ clears session logging the user out """
+    session.clear()
+    return redirect(url_for('home'))
 
 
 if __name__ == '__main__':
