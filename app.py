@@ -42,8 +42,11 @@ def home():
         return render_template('dashboard.html', name=session['username'])
     return render_template('home.html')
 
-
-
+@app.route('/dashboard')
+def dashboard():
+    if 'username' in session:
+        return render_template('dashboard.html', name=session['username'])
+    return render_template('dashboard.html')
 
 @app.route('/symptoms')
 def sym():
