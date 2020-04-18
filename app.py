@@ -57,6 +57,17 @@ def sym():
 def treat():
     return render_template('treatment.html')
 
+
+@app.route('/journal')
+def journal():
+    return render_template('journal.html')
+
+
+@app.route('/tfb_cycle')
+def tfb():
+    return render_template('tfb_cycle.html')
+    
+
 #User Register
 @app.route('/register' , methods=['GET', 'POST'])
 def register():
