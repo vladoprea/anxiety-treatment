@@ -1,9 +1,9 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-  <h1>Add Article</h1>
+  <h1>Add new journal entry</h1>
   {% from "includes/_formhelpers.html" import render_field %}
-  <form method="POST" action="">
+  <form  action="{{ url_for('insert_journal') }}" method="POST">
     <div class="form-group">
       {{ render_field(form.title, class="form-control") }}
     </div>
