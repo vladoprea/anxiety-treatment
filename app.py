@@ -35,6 +35,11 @@ class LoginForm(Form):
         validators.EqualTo('confirm', message='Passwords do not match')
     ])
 
+#Add Journal Entry Class
+class JournalForm(Form):
+    title = StringField('Title', [validators.Length(min=4, max=100)])
+    body = TextAreaField('Body', [validators.Length(min=30)])
+
 
 @app.route('/')
 def home():
@@ -60,13 +65,24 @@ def treat():
 
 @app.route('/journal')
 def journal():
-    return render_template('journal.html')
+    return render_template('journal.html', journals=mongo.db.journals.find())
 
 
 @app.route('/tfb_cycle')
 def tfb():
     return render_template('tfb_cycle.html')
-    
+
+@app.route('/add_journal')
+def add_journal():
+    form = JournalForm()
+    return render_template('add_journal.html', form=form)
+
+@app.route('/insert_journal', methods=['POST'])
+def insert_journal():
+    journals = mongo.db.journals
+    journals.insert_one(request.form.to_dict())
+    return redirect(url_for('journal'))
+
 
 #User Register
 @app.route('/register' , methods=['GET', 'POST'])
@@ -116,6 +132,7 @@ def login():
 def logout():
     """ clears session logging the user out """
     session.clear()
+    flash('You are now logged out', 'success')
     return redirect(url_for('home'))
 
 
