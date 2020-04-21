@@ -80,10 +80,6 @@ def journal():
     return render_template('journal.html', journals=mongo.db.journals.find())
 
 
-@app.route('/tfb_cycle')
-def tfb():
-    return render_template('tfb_cycle.html')
-
 @app.route('/add_journal')
 def add_journal():
     form = JournalForm()
@@ -99,6 +95,17 @@ def insert_journal():
         return redirect(url_for('journal'))
 
     return redirect(url_for('add_journal'))
+
+
+@app.route('/tfb_cycle')
+def tfb():
+    return render_template('tfb_cycle.html')
+
+
+@app.route('/add_tought')
+def add_tought():
+    form =ToughtsForm()
+    return render_template('add_tought.html', form=form)
 
 
 #User Register
