@@ -121,6 +121,15 @@ def insert_tought():
     return redirect(url_for('add_tought'))
 
 
+@app.route('/edit_journal/<journal_id>')
+def edit_journal(journal_id):
+    form = JournalForm()
+    new_journal = mongo.db.journals.find_one({"_id": ObjectId(journal_id)})
+    all_categories = mongo.db.categories.find()
+    return render_template('edit_journal.html', form = form, journal = new_journal, categories = all_categories)
+
+
+
 #User Register
 @app.route('/register' , methods=['GET', 'POST'])
 def register():
