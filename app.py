@@ -53,6 +53,7 @@ def dashboard():
         return render_template('dashboard.html', name=session['username'])
     return render_template('dashboard.html')
 
+
 @app.route('/symptoms')
 def sym():
     return render_template('symptoms.html')
@@ -79,9 +80,14 @@ def add_journal():
 
 @app.route('/insert_journal', methods=['POST'])
 def insert_journal():
+    form = JournalForm(request.form)
     journals = mongo.db.journals
-    journals.insert_one(request.form.to_dict())
-    return redirect(url_for('journal'))
+
+    if request.method == 'POST' and form.validate():
+        journals.insert_one(request.form.to_dict())
+        return redirect(url_for('journal'))
+        
+    return redirect(url_for('add_journal'))
 
 
 #User Register
