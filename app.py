@@ -1,7 +1,7 @@
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from flask import Flask, render_template, redirect, flash, request, url_for, session
-from wtforms import Form, StringField, TextAreaField, PasswordField, IntegerField, validators
+from wtforms import Form, StringField, TextAreaField, PasswordField, SelectField, validators
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 from os import path
@@ -43,7 +43,8 @@ class JournalForm(Form):
 #TFB Cycle Entry Class
 class ToughtsForm(Form):
     situation = StringField('Situation', [validators.Length(min=15)])
-    feeling = IntegerField('Feeling', [validators.NumberRange(min=1, max=10)])
+    feeling = StringField('Feeling', [validators.Length(min=5)])
+    rate_feeling = SelectField(u'Rate Feeling', choices = [('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'), ('7', '7'), ('8', '8'), ('9', '9'), ('10', '10')])
     physical = StringField('Physical', [validators.Length(min=15)])
     behaviour = StringField('Behaviour', [validators.Length(min=15)])
     hot_tought = StringField('Hot Tought', [validators.Length(min=5)])
