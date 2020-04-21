@@ -99,14 +99,26 @@ def insert_journal():
 
 
 @app.route('/tfb_cycle')
-def tfb():
-    return render_template('tfb_cycle.html')
+def tfb_cycle():
+    return render_template('tfb_cycle.html', toughts=mongo.db.toughts.find())
 
 
 @app.route('/add_tought')
 def add_tought():
     form =ToughtsForm()
     return render_template('add_tought.html', form=form)
+
+
+@app.route('/insert_tought', methods=['POST'])
+def insert_tought():
+    form = ToughtsForm(request.form)
+    toughts = mongo.db.toughts
+
+    if request.method == 'POST' and form.validate():
+        toughts.insert_one(request.form.to_dict())
+        return redirect(url_for('tfb_cycle'))
+
+    return redirect(url_for('add_tought'))
 
 
 #User Register
