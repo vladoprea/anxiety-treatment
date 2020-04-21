@@ -1,7 +1,7 @@
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from flask import Flask, render_template, redirect, flash, request, url_for, session
-from wtforms import Form, StringField, TextAreaField, PasswordField, validators
+from wtforms import Form, StringField, TextAreaField, PasswordField, IntegerField, validators
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 from os import path
@@ -35,10 +35,21 @@ class LoginForm(Form):
         validators.EqualTo('confirm', message='Passwords do not match')
     ])
 
-#Add Journal Entry Class
+#Journal Entry Class
 class JournalForm(Form):
     title = StringField('Title', [validators.Length(min=4, max=100)])
     body = TextAreaField('Body', [validators.Length(min=30)])
+
+#TFB Cycle Entry Class
+class ToughtsForm(Form):
+    situation = StringField('Situation', [validators.Length(min=15)])
+    feeling = IntegerField('Feeling', [validators.NumberRange(min=1, max=10)])
+    physical = StringField('Physical', [validators.Length(min=15)])
+    behaviour = StringField('Behaviour', [validators.Length(min=15)])
+    hot_tought = StringField('Hot Tought', [validators.Length(min=5)])
+    evidence = TextAreaField('Evidence', [validators.Length(min=30)])
+    counter_evidence = TextAreaField('Counter Evidence', [validators.Length(min=30)])
+    alternative = TextAreaField('Evidence', [validators.Length(min=30)])
 
 
 @app.route('/')
@@ -86,7 +97,7 @@ def insert_journal():
     if request.method == 'POST' and form.validate():
         journals.insert_one(request.form.to_dict())
         return redirect(url_for('journal'))
-        
+
     return redirect(url_for('add_journal'))
 
 
