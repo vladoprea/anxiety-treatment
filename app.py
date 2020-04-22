@@ -128,6 +128,16 @@ def edit_journal(journal_id):
     all_categories = mongo.db.categories.find()
     return render_template('edit_journal.html', form = form, journal = new_journal, categories = all_categories)
 
+@app.route('/update_journal/<journal_id>', methods=["POST"])
+def update_journal(journal_id):
+    journals = mongo.db.journals
+    journals.update( {'_id': ObjectId(journal_id)},
+    {
+        'title': request.form.get('title'),
+        'body': request.form.get('body')
+    })
+    return redirect(url_for('journal'))
+
 
 
 #User Register
