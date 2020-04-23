@@ -67,12 +67,12 @@ def dashboard():
 
 
 @app.route('/symptoms')
-def sym():
+def symptoms():
     return render_template('symptoms.html')
 
 
 @app.route('/treatment')
-def treat():
+def treatment():
     return render_template('treatment.html')
 
 
@@ -145,6 +145,34 @@ def edit_tought(tought_id):
     new_tought = mongo.db.toughts.find_one({"_id": ObjectId(tought_id)})
     all_categories = mongo.db.categories.find()
     return render_template('edit_tought.html', form = form, tought = new_tought, categories = all_categories)
+
+@app.route('/update_tought/<tought_id>', methods=["POST"])
+def update_tought(tought_id):
+    toughts = mongo.db.toughts
+    toughts.update( {'_id': ObjectId(tought_id)},
+    {
+        'situation': request.form.get('situation'),
+        'feeling': request.form.get('feeling'),
+        'rate_feeling': request.form.get('rate_feeling'),
+        'physical': request.form.get('physical'),
+        'behaviour': request.form.get('behaviour'),
+        'evidence': request.form.get('evidence'),
+        'counter_evidence': request.form.get('counter_evidence'),
+        'alternative': request.form.get('alternative')
+
+    })
+    return redirect(url_for('tfb_cycle'))
+
+
+@app.route('/delete_journal/<journal_id>')
+def delete_journal(journal_id):
+    mongo.db.journals.remove({'_id': ObjectId(journal_id)})
+    return redirect(url_for('journal'))
+
+@app.route('/delete_tought/<tought_id>')
+def delete_tought(tought_id):
+    mongo.db.toughts.remove({'_id': ObjectId(tought_id)})
+    return redirect(url_for('tfb_cycle'))
 
 
 #User Register
