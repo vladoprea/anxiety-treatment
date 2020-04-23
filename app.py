@@ -139,6 +139,13 @@ def update_journal(journal_id):
     return redirect(url_for('journal'))
 
 
+@app.route('/edit_tought/<tought_id>')
+def edit_tought(tought_id):
+    form = ToughtsForm()
+    new_tought = mongo.db.toughts.find_one({"_id": ObjectId(tought_id)})
+    all_categories = mongo.db.categories.find()
+    return render_template('edit_tought.html', form = form, tought = new_tought, categories = all_categories)
+
 
 #User Register
 @app.route('/register' , methods=['GET', 'POST'])
