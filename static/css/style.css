@@ -20,6 +20,27 @@ body {
     height: 400px;
 }
 
+/* Navigation bar */
+
+.navbar {
+    background-color: #3888ff;
+    min-height: 80px;
+}
+
+.navbar-light .navbar-brand {
+    color:#fff;
+    font-size: 1.1rem;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.bg-color {
+    background-color: rgb(255, 13, 49, 0.5)
+}
+
 /*       Images       */
 .symptoms {
     margin-top: 10px;
