@@ -3,6 +3,7 @@
 {% block body %}
 <main>
     <section class="container-fluid home-bg">
+        <div class="jumbotron bg-color">
         <div class="row">
             <div class="col title-style">
                 <h2 class="text-center">Anxiety disorder treatment techniques</h2>
@@ -10,12 +11,13 @@
         </div>
         <div class="row">
             <div class="col text-right">
-                <button type="button" class="btn btn-lg btn-warning">Create Account</button>
+                <button type="button" class="btn btn-lg btn-warning"><a href="{{ url_for('register') }}">Register</a></button>
             </div>
             <div class="col">
-                <button type="button" class="btn btn-lg btn-secondary">Login</button>
+                <button type="button" class="btn btn-lg btn-secondary"><a href="{{ url_for('login') }}">Login</a></button>
             </div>
         </div>
+    </div>
     </section>
     <section class="container">
         <div class="row def-title">
