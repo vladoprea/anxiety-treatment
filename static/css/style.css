@@ -37,8 +37,8 @@ body {
     font-size: 1.2rem;
 }
 
-.bg-color {
-    background-color: rgb(255, 13, 49, 0.5)
+.jumbotron {
+    background-color: rgba(255, 13, 49, 0.5)
 }
 
 /*       Images       */
