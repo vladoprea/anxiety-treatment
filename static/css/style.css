@@ -22,9 +22,9 @@ body {
 
 /* Navigation bar */
 
+
 .navbar {
     background-color: #3888ff;
-    min-height: 80px;
 }
 
 .navbar-light .navbar-brand {
@@ -37,6 +37,11 @@ body {
     font-size: 1.2rem;
 }
 
+.navbar-light .navbar-nav .help {
+    color:#ff0000;
+}
+
+
 .navbar-light .navbar-brand:hover {
     color: #e6e6e6;
 }
@@ -45,6 +50,9 @@ body {
     color: #e6e6e6;
 }
 
+.navbar-light .navbar-nav .help:hover {
+    color:#ff3e3e;
+}
 
 /*  Jumbotron */
 .jumbotron {
@@ -103,7 +111,22 @@ h2 {
     margin-bottom: 4rem;
 }
 
+h4 {
+    margin-top: 2rem; 
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+h5 {
+    margin-top: 2rem; 
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
 /*    Paragraphs    */
+p {
+    line-height: 1.6;
+}
 .def-title {
     margin-top: 40px;
 }
@@ -111,6 +134,10 @@ h2 {
 .def-paragraph {
     margin-top: 30px;
     margin-bottom: 30px;
+}
+
+.sym-treat {
+    margin-bottom: 80px;
 }
 
 /*  Font awesome icons  */
@@ -140,6 +167,11 @@ a {
     color: #212529;
     background-color: #28a745;
     border-color: #000000;
+}
+
+.btn a {
+    text-decoration: none;
+    color: #000;
 }
 
 /*    Footer    */
