@@ -37,6 +37,15 @@ body {
     font-size: 1.2rem;
 }
 
+.navbar-light .navbar-brand:hover {
+    color: #e6e6e6;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: #e6e6e6;
+}
+
+
 /*  Jumbotron */
 .jumbotron {
     background-color: rgba(0, 0, 0, 0.25);
@@ -59,8 +68,16 @@ body {
 
 /*   Cardboards with articles   */
 .cardboards {
-    margin-bottom: 50px;
+    margin-top: 40px;
+    margin-bottom: 80px;
+}
 
+.bg-color {
+    background-color: #f0f0f0;
+}
+
+.cardboards a {
+    text-decoration: none;
 }
 
 .symptoms-card {
@@ -127,8 +144,36 @@ a {
 
 /*    Footer    */
 .footer {
-    background-color: #7d7d7d;
-    color: #000;
+    background-color: #000;
+    color: #fff;
     height: 100px;
     flex-shrink: 0;
+}
+
+/* Media for responsive design */
+@media (max-width: 992px) {
+    .jumbotron {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+}
+
+@media (max-width:568px) {
+    .jumbotron {
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+}
+
+@media (max-width:359px) {
+    .jumbotron {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}
+
+@media (max-width: 767px) {
+    .treatment-card {
+        margin-top: 70px;
+    }
 }
