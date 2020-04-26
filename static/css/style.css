@@ -8,6 +8,14 @@ main {
     min-height: calc( 100vh - 190px);
 }
 
+hr {
+    border-top: 3px solid rgba(0,0,0,.1);
+    width: 60%;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+
+}
+
 
 /*   Background image home page    */
 .home-bg {
@@ -109,6 +117,15 @@ main {
     box-shadow: 10px 10px 5px #e2e2e2;
 }
 
+/*    Divs styling     */
+.journal-custom {
+    width: 60%;
+    margin-bottom: 80px;
+}
+
+.accordion-custom {
+    margin-top: 1.5rem;
+}
 
 /*   Headings   */
 h2 {
@@ -130,6 +147,11 @@ h5 {
     margin-top: 2rem; 
     margin-bottom: 1rem;
     font-weight: 600;
+}
+
+.journal-heading {
+    font-size: 1.25rem;
+    font-weight: 700;
 }
 
 /*    Paragraphs    */
@@ -185,7 +207,17 @@ a {
 
 .btn a {
     text-decoration: none;
+    color: #fff;
+}
+
+.btn-secondary a {
     color: #000;
+}
+
+.btn-link {
+    font-weight: 700;
+    color: #000000;
+    text-decoration: none;
 }
 
 /*    Footer    */
@@ -201,6 +233,9 @@ a {
         margin-left: 100px;
         margin-right: 100px;
     }
+    .journal-custom {
+        width: 80%;
+    }
 }
 
 @media (max-width: 768px) {
@@ -212,6 +247,9 @@ a {
     }
     .tfb-custom {
         margin-top: 70px;
+    }
+    .journal-custom {
+        width: 100%;
     }
 }
 

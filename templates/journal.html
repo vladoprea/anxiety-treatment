@@ -1,39 +1,55 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<div class="container">
+<section class="container journal-custom">
+  <div class="container journal-title">
     <div class="row">
         <div class="col">
-            <h3>My journal</h3>
-        </div>
-        <div class="col">
-          <button class="btn btn-primary"><a href="/add_journal.html">Add new entry</a></button>
+            <h4>Personal journal</h4>
         </div>
     </div>
- 
     <div class="row">
+      <div class="col">
+        <p>Research shows that keeping a journal can help you to <strong>clarify
+           your thoughts and feelings</strong>, reduce stress and solve problems more 
+           effectively, so it is well worth the effort.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <p class="journal-heading">Previous entries:<p>
+      </div>
+      <div class="col text-right">
+        <button class="btn btn-warning"><a href="{{ url_for('add_journal') }}">Add new entry</a></button>
+      </div>
+    </div>
+    <div class="row accordion-custom">
         <div class="col">
           {% for journal in journals %}
             <div class="accordion" id="accordionExample">
                 <div class="card">
                   <div class="card-header" id="headingOne">
                     <h2 class="mb-0">
-                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"  aria-expanded="true" aria-controls="collapseOne">
                         {{journal.title}}
                       </button>
                     </h2>
                   </div>
               
-                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                  <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <div class="card-body">
                       {{journal.body}}
                     </div>
                     <div class="row">
-                      <div class="col">
-                        <button type="button" class="btn btn-dark"><a href="{{url_for('edit_journal', journal_id=journal._id)}}">Edit</a></button>
-                      </div>
-                      <div class="col">
-                        <button type="button" class="btn btn-info"><a href="{{url_for('delete_journal', journal_id=journal._id)}}">Delete</a></button>
+                      <div class="col text-right">
+                        <button type="button" class="btn btn-info"><a href="{{url_for('edit_journal', journal_id=journal._id)}}">Edit</a></button>
+                        <button type="button" class="btn btn-danger"><a href="{{url_for('delete_journal', journal_id=journal._id)}}">Delete</a></button>
                       </div>
                     </div>
                   </div>
@@ -42,6 +58,7 @@
             {% endfor %}
         </div>
     </div>
-</div>
+  </div>
+  </section>
 
 {% endblock %}
