@@ -1,64 +1,102 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<div class="container">
+<section class="container tools-box">
+  <div class="container journal-title">
     <div class="row">
         <div class="col">
-            <h3>TFB Cycle (Toughts, Feelings, Behaviour</h3>
+            <h4>My TFB Cycles</h4>
         </div>
     </div>
     <div class="row">
-        <div class="col">
-          {% for tought in toughts %}
-            <div class="accordion" id="accordionExample">
-                <div class="card">
-                  <div class="card-header" id="headingOne">
-                    <h2 class="mb-0">
-                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        {{tought.situation}}
-                      </button>
-                    </h2>
-                  </div>
-              
-                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                    <div class="card-body">
-                      {{tought.feeling}}
+      <div class="col">
+        <p><strong>A hot thought</strong> is the situation-specific thought that carries the strongest emotional charge.
+           <strong>It drives emotion in your TFB cycle.</strong> One way to recognise a hot thought is that it tends to match your mood.
+        </p>
+        <p>
+          To come up with useful alternative thoughts, do the following:
+        </p>
+        <ul>
+          <em>
+          <li>
+            Spot your hot thought.
+          </li>
+          <li>
+            Examine how fair, balanced and accurate this thought is.
+          </li>
+          <li>
+            Replace unfair and inaccurate thoughts with alternative fairer thoughts.
+          </li>
+          </em>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <p class="journal-heading">Previous entries:<p>
+      </div>
+      <div class="col text-right">
+        <button class="btn btn-warning"><a href="{{ url_for('add_tought') }}">Add new entry</a></button>
+      </div>
+    </div>
+    <div class="row">
+          <div class="col">
+            {% for tought in toughts %}
+              <div class="accordion" id="accordionExample">
+                  <div class="card">
+                    <div class="card-header" id="headingOne">
+                      <h2 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          {{tought.situation}}
+                        </button>
+                      </h2>
                     </div>
-                    <div class="card-body">
-                      {{tought.rate_feeling}}
-                    </div>
-                    <div class="card-body">
-                      {{tought.physical}}
-                    </div>
-                    <div class="card-body">
-                      {{tought.behaviour}}
-                    </div>
-                    <div class="card-body">
-                      {{tought.hot_tought}}
-                    </div>
-                    <div class="card-body">
-                      {{tought.evidence}}
-                    </div>
-                    <div class="card-body">
-                      {{tought.counter_evidence}}
-                    </div>
-                    <div class="card-body">
-                      {{tought.alternative}}
-                    </div>
-                    
-                    <div class="row">
-                      <div class="col">
-                        <button type="button" class="btn btn-dark"><a href="{{url_for('edit_tought', tought_id=tought._id)}}">Edit</a></button>
+                
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                      <div class="card-body">
+                        {{tought.feeling}}
                       </div>
-                      <div class="col">
-                        <button type="button" class="btn btn-info"><a href="{{url_for('delete_tought', tought_id=tought._id)}}">Delete</a></button>
+                      <div class="card-body">
+                        {{tought.rate_feeling}}
+                      </div>
+                      <div class="card-body">
+                        {{tought.physical}}
+                      </div>
+                      <div class="card-body">
+                        {{tought.behaviour}}
+                      </div>
+                      <div class="card-body">
+                        {{tought.hot_tought}}
+                      </div>
+                      <div class="card-body">
+                        {{tought.evidence}}
+                      </div>
+                      <div class="card-body">
+                        {{tought.counter_evidence}}
+                      </div>
+                      <div class="card-body">
+                        {{tought.alternative}}
+                      </div>
+                      
+                      <div class="row">
+                        <div class="col text-right">
+                          <button type="button" class="btn btn-info"><a href="{{url_for('edit_tought', tought_id=tought._id)}}">Edit</a></button>
+                          <button type="button" class="btn btn-danger"><a href="{{url_for('delete_tought', tought_id=tought._id)}}">Delete</a></button>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            {% endfor %}
-        </div>
-    </div>
+              {% endfor %}
+          </div>
+      </div>
+  </div>
 </div>
+</section>
 {% endblock %}

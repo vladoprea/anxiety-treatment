@@ -118,7 +118,7 @@ hr {
 }
 
 /*    Divs styling     */
-.journal-custom {
+.tools-box {
     width: 60%;
     margin-bottom: 80px;
 }
@@ -126,6 +126,8 @@ hr {
 .accordion-custom {
     margin-top: 1.5rem;
 }
+
+
 
 /*   Headings   */
 h2 {
@@ -233,7 +235,7 @@ a {
         margin-left: 100px;
         margin-right: 100px;
     }
-    .journal-custom {
+    .tools-box {
         width: 80%;
     }
 }
@@ -248,7 +250,7 @@ a {
     .tfb-custom {
         margin-top: 70px;
     }
-    .journal-custom {
+    .tools-box {
         width: 100%;
     }
 }
