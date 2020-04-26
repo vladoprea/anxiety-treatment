@@ -9,7 +9,7 @@ main {
 }
 
 
-/*    Background image    */
+/*   Background image home page    */
 .home-bg {
     background-image: url(../images/background.jpg);
     background-position: center;
@@ -18,9 +18,8 @@ main {
     height: 400px;
 }
 
+
 /* Navigation bar */
-
-
 .navbar {
     background-color: #3888ff;
 }
@@ -71,6 +70,18 @@ main {
     height: 200px;
     width: 100%;
 }
+
+.tools-img {
+    width: 200px;
+    height:200px;
+}
+
+.tools-custom {
+    background-color:#e4e4e4;
+    margin-top:50px;
+    padding-bottom: 80px;
+}
+
 
 /*   Cardboards with articles   */
 .cardboards {
@@ -198,6 +209,9 @@ a {
     }
     .form-custom {
         width: 60%;
+    }
+    .tfb-custom {
+        margin-top: 70px;
     }
 }
 
