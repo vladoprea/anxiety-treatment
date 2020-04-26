@@ -176,6 +176,7 @@ p {
 /*    Forms    */
 .form-custom {
     width: 40%;
+    padding-bottom: 80px;
 }
 
 /*  Font awesome icons  */

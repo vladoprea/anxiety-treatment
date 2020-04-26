@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block body%}
+<div class="container form-custom">
+<h4>Edit TFB cycle</h4>
+  {% from "includes/_formhelpers.html" import render_field %}
+  <form  action="{{ url_for('update_tought', tought_id=tought._id) }}" method="POST">
+    <div class="form-group">
+        {{ render_field(form.situation, class="form-control") }}
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col">
+                {{ render_field(form.feeling, class="form-control") }}
+            </div>
+            <div class="col">
+                {{ render_field(form.rate_feeling, class="form-control") }}
+            </div>    
+        </div>
+    </div>
+    <div class="form-group">
+        {{ render_field(form.physical, class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ render_field(form.behaviour, class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ render_field(form.hot_tought, class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ render_field(form.evidence, class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ render_field(form.counter_evidence, class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ render_field(form.alternative, class="form-control") }}
+    </div>
+    <button type="submit" class="btn btn-info">Update</button>
+  </form>
+</div>
+{% endblock %}
