@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block body %}
+<div class="container form-custom">
   <h1>Edit your entry</h1>
   {% from "includes/_formhelpers.html" import render_field %}
   
@@ -11,6 +12,7 @@
     <div class="form-group">
       {{ render_field(form.body, class="form-control") }}
     </div>
-    <button type="submit" class="btn btn-primary">Update</button>
-</form>
+    <button type="submit" class="btn btn-info">Update</button>
+  </form>
+</div>
 {% endblock %}
