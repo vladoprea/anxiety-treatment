@@ -200,7 +200,7 @@ def register():
     return render_template('register.html', form=form)
 
 #User Login
-@app.route('/login' , methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm(request.form)
 
