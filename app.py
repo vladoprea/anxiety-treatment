@@ -55,14 +55,14 @@ class ToughtsForm(Form):
 
 @app.route('/')
 def home():
-    if 'username' in session:
-        return render_template('dashboard.html', name=session['username'])
+    if 'email' in session:
+        return render_template('dashboard.html', name=session['email'])
     return render_template('home.html')
 
 @app.route('/dashboard')
 def dashboard():
-    if 'username' in session:
-        return render_template('dashboard.html', name=session['username'])
+    if 'email' in session:
+        return render_template('dashboard.html', name=session['email'])
     return render_template('dashboard.html')
 
 
@@ -206,11 +206,11 @@ def login():
 
     if request.method == 'POST':
         users = mongo.db.users
-        user_login = users.find_one({'username': request.form['username']})
+        email_login = users.find_one({'email': request.form['email']})
 
-        if user_login:
-            if check_password_hash(user_login['password'], request.form["password"]):
-                session['username'] = request.form['username']
+        if email_login:
+            if check_password_hash(email_login['password'], request.form["password"]):
+                session['email'] = request.form['email']
                 return redirect(url_for('dashboard'))
             return redirect(url_for('login'))
         
