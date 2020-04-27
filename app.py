@@ -50,7 +50,7 @@ class ToughtsForm(Form):
     hot_tought = StringField('Hot Tought', [validators.Length(min=5)])
     evidence = TextAreaField('Evidence', [validators.Length(min=30)])
     counter_evidence = TextAreaField('Counter Evidence', [validators.Length(min=30)])
-    alternative = TextAreaField('Evidence', [validators.Length(min=30)])
+    alternative = TextAreaField('Alternative', [validators.Length(min=30)])
 
 
 @app.route('/')
