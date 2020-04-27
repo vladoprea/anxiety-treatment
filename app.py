@@ -38,19 +38,19 @@ class LoginForm(Form):
 #Journal Entry Class
 class JournalForm(Form):
     title = StringField('Title', [validators.Length(min=4, max=100)])
-    body = TextAreaField('Body', [validators.Length(min=30)])
+    body = TextAreaField('Description', [validators.Length(min=30)])
 
 #TFB Cycle Entry Class
 class ToughtsForm(Form):
     situation = StringField('Situation', [validators.Length(min=15)])
     feeling = StringField('Feeling', [validators.Length(min=5)])
     rate_feeling = SelectField(u'Rate Feeling', choices = [('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'), ('7', '7'), ('8', '8'), ('9', '9'), ('10', '10')])
-    physical = StringField('Physical', [validators.Length(min=15)])
-    behaviour = StringField('Behaviour', [validators.Length(min=15)])
+    physical = StringField('Physical Reaction', [validators.Length(min=15)])
+    behaviour = StringField('Behaviours', [validators.Length(min=15)])
     hot_tought = StringField('Hot Tought', [validators.Length(min=5)])
-    evidence = TextAreaField('Evidence', [validators.Length(min=30)])
-    counter_evidence = TextAreaField('Counter Evidence', [validators.Length(min=30)])
-    alternative = TextAreaField('Alternative', [validators.Length(min=30)])
+    evidence = TextAreaField('Evidence that support the hot tought', [validators.Length(min=30)])
+    counter_evidence = TextAreaField('Counter Evidence for the hot tought', [validators.Length(min=30)])
+    alternative = TextAreaField('Alternative/Balanced toughts', [validators.Length(min=30)])
 
 
 @app.route('/')
@@ -125,10 +125,9 @@ def insert_tought():
 def edit_journal(journal_id):
     form = JournalForm()
     new_journal = mongo.db.journals.find_one({"_id": ObjectId(journal_id)})
-    all_categories = mongo.db.categories.find()
-    return render_template('edit_journal.html', form = form, journal = new_journal, categories = all_categories)
+    return render_template('edit_journal.html', form = form, journal = new_journal)
 
-@app.route('/update_journal/<journal_id>', methods=["POST"])
+@app.route('/update_journal/<journal_id>', methods=["GET", "POST"])
 def update_journal(journal_id):
     journals = mongo.db.journals
     journals.update( {'_id': ObjectId(journal_id)},
@@ -143,8 +142,7 @@ def update_journal(journal_id):
 def edit_tought(tought_id):
     form = ToughtsForm()
     new_tought = mongo.db.toughts.find_one({"_id": ObjectId(tought_id)})
-    all_categories = mongo.db.categories.find()
-    return render_template('edit_tought.html', form = form, tought = new_tought, categories = all_categories)
+    return render_template('edit_tought.html', form = form, tought = new_tought)
 
 @app.route('/update_tought/<tought_id>', methods=["POST"])
 def update_tought(tought_id):
