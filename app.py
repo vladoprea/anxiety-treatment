@@ -169,6 +169,7 @@ def delete_journal(journal_id):
     mongo.db.journals.remove({'_id': ObjectId(journal_id)})
     return redirect(url_for('journal'))
 
+
 @app.route('/delete_tought/<tought_id>')
 def delete_tought(tought_id):
     mongo.db.toughts.remove({'_id': ObjectId(tought_id)})
