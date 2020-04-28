@@ -38,7 +38,7 @@ class LoginForm(Form):
 #Journal Entry Class
 class JournalForm(Form):
     title = StringField('Title', [validators.Length(min=4, max=100)])
-    body = TextAreaField('Description', [validators.Length(min=30)])
+    body = TextAreaField('Description')
 
 #TFB Cycle Entry Class
 class ToughtsForm(Form):
@@ -77,7 +77,9 @@ def treatment():
 
 
 @app.route('/journal')
+
 def journal():
+
     return render_template('journal.html', journals=mongo.db.journals.find())
 
 
@@ -90,9 +92,12 @@ def add_journal():
 def insert_journal():
     form = JournalForm(request.form)
     journals = mongo.db.journals
+    new_journal = request.form.to_dict()
+    new_journal['owner']=session['email']
+    print(new_journal)
 
     if request.method == 'POST' and form.validate():
-        journals.insert_one(request.form.to_dict())
+        journals.insert_one(new_journal)
         return redirect(url_for('journal'))
 
     return redirect(url_for('add_journal'))
@@ -123,8 +128,9 @@ def insert_tought():
 
 @app.route('/edit_journal/<journal_id>')
 def edit_journal(journal_id):
-    form = JournalForm()
     new_journal = mongo.db.journals.find_one({"_id": ObjectId(journal_id)})
+    form = JournalForm()
+    print(new_journal)
     return render_template('edit_journal.html', form = form, journal = new_journal)
 
 @app.route('/update_journal/<journal_id>', methods=["GET", "POST"])
@@ -140,8 +146,9 @@ def update_journal(journal_id):
 
 @app.route('/edit_tought/<tought_id>')
 def edit_tought(tought_id):
-    form = ToughtsForm()
     new_tought = mongo.db.toughts.find_one({"_id": ObjectId(tought_id)})
+    form = ToughtsForm()
+    print(new_tought)
     return render_template('edit_tought.html', form = form, tought = new_tought)
 
 @app.route('/update_tought/<tought_id>', methods=["POST"])
