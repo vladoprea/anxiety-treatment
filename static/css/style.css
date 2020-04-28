@@ -35,6 +35,7 @@ hr {
 .navbar-light .navbar-brand {
     color:#fff;
     font-size: 1.2rem;
+    margin-left: 200px;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -182,16 +183,6 @@ p {
 }
 
 /*   Buttons    */
-.btn-outline-light {
-    color: #000;
-    border-color: #000;
-}
-
-a {
-    text-decoration: none;
-    color: #000;
-}
-
 .btn-secondary {
     color: #fff;
     background-color: #f8f9fa;
@@ -219,9 +210,14 @@ a {
     text-decoration: none;
 }
 
+.btn-outline-light {
+    color: #000;
+    border-color: #000;
+}
+
 /*    Footer    */
 .footer {
-    background-color: #000;
+    background-color:#0b1a0f;
     color: #fff;
     min-height: 100px;
 }
@@ -234,6 +230,9 @@ a {
     }
     .tools-box {
         width: 80%;
+    }
+    .navbar-light .navbar-brand {
+        margin-left: 100px;
     }
 }
 
@@ -260,6 +259,9 @@ a {
 
     .form-custom {
         width: 80%;
+    }
+    .navbar-light .navbar-brand {
+        margin-left: 0px;
     }
 }
 
