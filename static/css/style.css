@@ -73,12 +73,6 @@ main {
     height:200px;
 }
 
-.tools-custom {
-    background-color:#e4e4e4;
-    margin-top:50px;
-    padding-bottom: 80px;
-}
-
 
 /*   Cardboards with articles   */
 .cardboards {
@@ -116,6 +110,25 @@ main {
     margin-top: 1.5rem;
 }
 
+.tools-custom {
+    background-color: #f0f0f0;
+    margin-top: 20px;
+    padding-bottom:80px;
+}
+
+.dashboard {
+    width: 50%;
+}
+
+.tools {
+    margin-bottom:30px;
+ }
+
+ .sym-treat {
+    margin-top:50px;
+    margin-bottom: 80px;
+    width: 50%;
+}
 
 
 /*   Headings   */
@@ -158,11 +171,6 @@ p {
     margin-bottom: 30px;
 }
 
-.sym-treat {
-    margin-top:50px;
-    margin-bottom: 80px;
-    width: 50%;
-}
 
 /*    Forms    */
 .form-custom {
@@ -208,10 +216,6 @@ a {
     text-decoration: none;
 }
 
-.read-more {
-    color:#000;
-}
-
 
 /*    Footer    */
 .footer {
@@ -235,17 +239,14 @@ a {
     .sym-treat {
         width: 60%;
     }
+    .dashboard {
+        width: 60%;
+    }
 }
 
 @media (max-width: 768px) {
-    .treatment-card {
-        margin-top: 70px;
-    }
     .form-custom {
         width: 60%;
-    }
-    .tfb-custom {
-        margin-top: 70px;
     }
     .tools-box {
         width: 100%;
@@ -253,6 +254,18 @@ a {
     .sym-treat {
         width: 70%;
         margin-top: 0px;
+    }
+    .dashboard {
+        width: 70%;
+    }
+}
+
+@media (max-width: 767px) {
+    .tfb-custom {
+        margin-top: 70px;
+    }
+    .treatment-card {
+        margin-top: 70px;
     }
 }
 
@@ -271,6 +284,9 @@ a {
     .sym-treat {
         width: 100%;
         margin-top: 0px;
+    }
+    .dashboard {
+        width: 100%;
     }
 }
 
