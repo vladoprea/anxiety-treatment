@@ -56,32 +56,54 @@
                 
                     <div id="collapse{{tought._id}}" class="collapse" aria-labelledby="heading{{tought._id}}" data-parent="#accordionExample">
                       <div class="card-body">
+                        <p><strong>Feeling:</strong></p>
                         {{tought.feeling}}
                       </div>
+                      <hr>
+      
                       <div class="card-body">
+                        <p><strong>Rate feeling:</strong></p>
                         {{tought.rate_feeling}}
                       </div>
+                      <hr>
+                      
                       <div class="card-body">
+                        <p><strong>Physical reaction:</strong></p>
                         {{tought.physical}}
                       </div>
+                      <hr>
+                      
                       <div class="card-body">
+                        <p><strong>Behaviour:</strong></p>
                         {{tought.behaviour}}
                       </div>
+                      <hr>
+
                       <div class="card-body">
+                        <p><strong>Hot tought:</strong></p>
                         {{tought.hot_tought}}
                       </div>
+                      <hr>
+
                       <div class="card-body">
+                        <p><strong>Evidence that support the hot tought:</strong></p>
                         {{tought.evidence}}
                       </div>
+                      <hr>
+
                       <div class="card-body">
+                        <p><strong>Counter Evidence for the hot tought:</strong></p>
                         {{tought.counter_evidence}}
                       </div>
+                      <hr>
+
                       <div class="card-body">
+                        <p><strong>Alternative/Balanced toughts:</strong></p>
                         {{tought.alternative}}
                       </div>
                       
                       <div class="row">
-                        <div class="col button style text-right">
+                        <div class="col button-style text-right">
                           <button type="button" class="btn btn-info"><a href="{{url_for('edit_tought', tought_id=tought._id)}}">Edit</a></button>
                           <button type="button" class="btn btn-danger"><a href="{{url_for('delete_tought', tought_id=tought._id)}}">Delete</a></button>
                         </div>
