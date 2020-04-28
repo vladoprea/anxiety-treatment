@@ -2,7 +2,7 @@
 
 {% block body %}
 <section class="container tools-box">
-  <div class="container journal-title">
+  <div class="container tools-text">
     <div class="row">
         <div class="col">
             <h4>Personal journal</h4>
@@ -20,7 +20,7 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <p class="journal-heading">Previous entries:<p>
+        <p class="tools-heading">Previous entries:<p>
       </div>
       <div class="col text-right">
         <button class="btn btn-warning"><a href="{{ url_for('add_journal') }}">Add new entry</a></button>
@@ -43,7 +43,7 @@
                       {{journal.body}}
                     </div>
                     <div class="row">
-                      <div class="col text-right">
+                      <div class="col button-style text-right">
                         <button type="button" class="btn btn-info"><a href="{{url_for('edit_journal', journal_id=journal._id)}}">Edit</a></button>
                         <button type="button" class="btn btn-danger"><a href="{{url_for('delete_journal', journal_id=journal._id)}}">Delete</a></button>
                       </div>

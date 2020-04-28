@@ -130,6 +130,10 @@ main {
     width: 50%;
 }
 
+.tools-text {
+    margin-bottom: 50px;
+}
+
 
 /*   Headings   */
 h2 {
@@ -153,7 +157,7 @@ h5 {
     font-weight: 600;
 }
 
-.journal-heading {
+.tools-heading {
     font-size: 1.25rem;
     font-weight: 700;
 }
@@ -216,6 +220,11 @@ a {
     text-decoration: none;
 }
 
+.button-style {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
 
 /*    Footer    */
 .footer {
@@ -249,7 +258,7 @@ a {
         width: 60%;
     }
     .tools-box {
-        width: 100%;
+        width: 80%;
     }
     .sym-treat {
         width: 70%;
@@ -287,6 +296,10 @@ a {
     }
     .dashboard {
         width: 100%;
+    }
+    .tools-box {
+        width: 100%;
+        padding: 0px;
     }
 }
 
