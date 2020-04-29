@@ -76,6 +76,11 @@ def treatment():
     return render_template('treatment.html')
 
 
+@app.route('help_guide')
+def help_guide():
+    return render_template('help_guide.html')
+
+
 @app.route('/journal')
 
 def journal():
