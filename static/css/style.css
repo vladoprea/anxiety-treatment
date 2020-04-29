@@ -133,6 +133,14 @@ main {
 .tools-text {
     margin-bottom: 50px;
 }
+.tfb-row {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.label {
+    color:#565758;
+    padding: 10px 20px;
+}
 
 
 /*   Headings   */
@@ -188,6 +196,7 @@ p {
     padding-left: 4px;
 }
 
+
 /*   Buttons    */
 a {
     text-decoration: none;
@@ -225,6 +234,9 @@ a {
     margin-bottom: 10px;
 }
 
+.btn-link:hover {
+    text-decoration: none;
+}
 
 /*    Footer    */
 .footer {
