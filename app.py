@@ -42,15 +42,15 @@ class JournalForm(Form):
 
 #TFB Cycle Entry Class
 class ToughtsForm(Form):
-    situation = StringField('Situation', [validators.Length(min=15)])
-    feeling = StringField('Feeling', [validators.Length(min=5)])
+    situation = StringField('Situation', [validators.Length(min=5)])
+    feeling = StringField('Feeling')
     rate_feeling = SelectField(u'Rate Feeling', choices = [('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'), ('7', '7'), ('8', '8'), ('9', '9'), ('10', '10')])
-    physical = StringField('Physical Reaction', [validators.Length(min=15)])
-    behaviour = StringField('Behaviours', [validators.Length(min=15)])
-    hot_tought = StringField('Hot Tought', [validators.Length(min=5)])
-    evidence = TextAreaField('Evidence that support the hot tought', [validators.Length(min=30)])
-    counter_evidence = TextAreaField('Counter Evidence for the hot tought', [validators.Length(min=30)])
-    alternative = TextAreaField('Alternative/Balanced toughts', [validators.Length(min=30)])
+    physical = StringField('Physical Reaction')
+    behaviour = StringField('Behaviours')
+    hot_tought = StringField('Hot Tought')
+    evidence = TextAreaField('Evidence that support the hot tought')
+    counter_evidence = TextAreaField('Counter Evidence for the hot tought')
+    alternative = TextAreaField('Alternative/Balanced toughts')
 
 
 @app.route('/')
