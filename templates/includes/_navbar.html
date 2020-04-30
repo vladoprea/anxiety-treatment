@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-sm navbar-light">
-    {% if 'email' in session %}
+    {% if current_user.is_authenticated %}
     <a class="navbar-brand" href="/dashboard">Dashboard</a>
     {% else %}
     <a class="navbar-brand" href="/">Home</a>
@@ -10,7 +10,7 @@
     </button>
     <div class="collapse navbar-collapse ml-auto" id="navbarNavAltMarkup">
         <div class="navbar-nav ml-auto">
-            {% if 'email' in session %}
+            {% if current_user.is_authenticated %}
             <a class="nav-item nav-link" href="/journal">Journal</a>
             <a class="nav-item nav-link" href="/tfb_cycle">TFB Cycle</a>
             <a class="nav-item nav-link" href="/logout">Logout</a>
