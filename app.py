@@ -86,6 +86,7 @@ def home():
     return render_template('home.html')
 
 @app.route('/dashboard')
+@login_required
 def dashboard():
     return render_template('dashboard.html')
 
@@ -106,19 +107,20 @@ def help_guide():
 
 
 @app.route('/journal')
-
+@login_required
 def journal():
 
     return render_template('journal.html', journals=mongo.db.journals.find())
 
 
 @app.route('/add_journal')
-
+@login_required
 def add_journal():
     form = JournalForm()
     return render_template('add_journal.html', form=form)
 
 @app.route('/insert_journal', methods=['POST'])
+@login_required
 def insert_journal():
     form = JournalForm(request.form)
     journals = mongo.db.journals
@@ -134,17 +136,20 @@ def insert_journal():
 
 
 @app.route('/tfb_cycle')
+@login_required
 def tfb_cycle():
     return render_template('tfb_cycle.html', toughts=mongo.db.toughts.find())
 
 
 @app.route('/add_tought')
+@login_required
 def add_tought():
     form =ToughtsForm()
     return render_template('add_tought.html', form=form)
 
 
 @app.route('/insert_tought', methods=['POST'])
+@login_required
 def insert_tought():
     form = ToughtsForm(request.form)
     toughts = mongo.db.toughts
@@ -157,6 +162,7 @@ def insert_tought():
 
 
 @app.route('/edit_journal/<journal_id>')
+@login_required
 def edit_journal(journal_id):
     new_journal = mongo.db.journals.find_one({"_id": ObjectId(journal_id)})
     form = JournalForm()
@@ -164,6 +170,7 @@ def edit_journal(journal_id):
     return render_template('edit_journal.html', form = form, journal = new_journal)
 
 @app.route('/update_journal/<journal_id>', methods=["GET", "POST"])
+@login_required
 def update_journal(journal_id):
     journals = mongo.db.journals
     journals.update( {'_id': ObjectId(journal_id)},
@@ -175,6 +182,7 @@ def update_journal(journal_id):
 
 
 @app.route('/edit_tought/<tought_id>')
+@login_required
 def edit_tought(tought_id):
     new_tought = mongo.db.toughts.find_one({"_id": ObjectId(tought_id)})
     form = ToughtsForm()
@@ -182,6 +190,7 @@ def edit_tought(tought_id):
     return render_template('edit_tought.html', form = form, tought = new_tought)
 
 @app.route('/update_tought/<tought_id>', methods=["POST"])
+@login_required
 def update_tought(tought_id):
     toughts = mongo.db.toughts
     toughts.update( {'_id': ObjectId(tought_id)},
@@ -224,7 +233,6 @@ def register():
             if email_exist is None:
                 hashpass = generate_password_hash(request.form["password"])
                 users.insert({'username' : request.form['username'], 'email': request.form['email'] , 'password' : hashpass})
-                session['username'] = request.form['username']
                 return redirect(url_for('login'))
             
             flash('That email already exists')
