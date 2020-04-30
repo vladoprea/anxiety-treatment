@@ -1,6 +1,7 @@
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from flask import Flask, render_template, redirect, flash, request, url_for, session
+from flask_login import current_user, login_user, logout_user, login_required, LoginManager
 from wtforms import Form, StringField, TextAreaField, PasswordField, SelectField, validators
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
@@ -16,6 +17,8 @@ app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 
 mongo = PyMongo(app)
+login_manager = LoginManager(app)
+
 
 # Register From Class
 class RegisterForm(Form):
@@ -52,17 +55,38 @@ class ToughtsForm(Form):
     counter_evidence = TextAreaField('Counter Evidence for the hot tought')
     alternative = TextAreaField('Alternative/Balanced toughts')
 
+class User:
+
+    def __init__(self, email):
+        self.email = email
+
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return self.email
+
+    @staticmethod
+    def validate_login(password_hash, password):
+        return check_password_hash(password_hash, password)
+
+@login_manager.user_loader
+def load_user(user_login):
+    return User(user_login)
+
 
 @app.route('/')
 def home():
-    if 'email' in session:
-        return render_template('dashboard.html', name=session['email'])
     return render_template('home.html')
 
 @app.route('/dashboard')
 def dashboard():
-    if 'email' in session:
-        return render_template('dashboard.html', name=session['email'])
     return render_template('dashboard.html')
 
 
@@ -76,7 +100,7 @@ def treatment():
     return render_template('treatment.html')
 
 
-@app.route('help_guide')
+@app.route('/help_guide')
 def help_guide():
     return render_template('help_guide.html')
 
@@ -89,6 +113,7 @@ def journal():
 
 
 @app.route('/add_journal')
+
 def add_journal():
     form = JournalForm()
     return render_template('add_journal.html', form=form)
@@ -217,13 +242,12 @@ def login():
 
     if request.method == 'POST':
         users = mongo.db.users
-        email_login = users.find_one({'email': request.form['email']})
+        user_login = users.find_one({'email': request.form['email']})
 
-        if email_login:
-            if check_password_hash(email_login['password'], request.form["password"]):
-                session['email'] = request.form['email']
-                return redirect(url_for('dashboard'))
-            return redirect(url_for('login'))
+        if user_login and User.validate_login(user_login['password'], request.form["password"]):
+            user_obj = User(user_login['email'])
+            login_user(user_obj)
+            return redirect(url_for('dashboard'))
         
         flash('Username does not exist')
         return redirect(url_for('register'))
@@ -232,9 +256,7 @@ def login():
 
 @app.route('/logout')
 def logout():
-    """ clears session logging the user out """
-    session.clear()
-    flash('You are now logged out', 'success')
+    logout_user()
     return redirect(url_for('home'))
 
 
