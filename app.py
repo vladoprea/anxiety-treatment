@@ -19,6 +19,7 @@ app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 
 mongo = PyMongo(app)
 login_manager = LoginManager(app)
+login_manager.login_view = 'login'
 
 
 # Register From Class
@@ -88,6 +89,8 @@ def load_user(email):
 
 @app.route('/')
 def home():
+    if current_user.is_authenticated:
+        return render_template('dashboard.html')
     return render_template('home.html')
 
 @app.route('/dashboard')
@@ -260,7 +263,9 @@ def login():
         if user_login and User.validate_login(user_login['password'], request.form["password"]):
             user_obj = User(email=user_login['email'])
             login_user(user_obj)
-            return redirect(url_for('dashboard'))
+            flash('You logged in successfully')
+            next = request.args.get('next')
+            return redirect(next or url_for('dashboard'))
         
         flash('Username does not exist')
         return redirect(url_for('register'))
