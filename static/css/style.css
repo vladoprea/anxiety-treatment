@@ -37,11 +37,11 @@ main {
 
 
 .navbar-light .navbar-brand:hover {
-    color: #e6e6e6;
+    color:#695555;
 }
 
 .navbar-light .navbar-nav .nav-link:hover {
-    color: #e6e6e6;
+    color:#695555;
 }
 
 .navbar-light .navbar-nav .help:hover {
@@ -138,7 +138,7 @@ main {
     margin-bottom: 20px;
 }
 .label {
-    color:#050708;
+    color: #565758;
     padding: 10px 20px;
 }
 .help-guide {
