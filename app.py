@@ -1,5 +1,6 @@
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from bson.json_util import dumps
 from flask import Flask, render_template, redirect, flash, request, url_for, session
 from flask_login import current_user, login_user, logout_user, login_required, LoginManager
 from wtforms import Form, StringField, TextAreaField, PasswordField, SelectField, validators
@@ -77,8 +78,12 @@ class User:
         return check_password_hash(password_hash, password)
 
 @login_manager.user_loader
-def load_user(user_login):
-    return User(user_login)
+def load_user(email):
+    users = mongo.db.users
+    u = users.find_one({'email': email})
+    if not u:
+        return None
+    return User(email=u['email'])
 
 
 @app.route('/')
@@ -253,7 +258,7 @@ def login():
         user_login = users.find_one({'email': request.form['email']})
 
         if user_login and User.validate_login(user_login['password'], request.form["password"]):
-            user_obj = User(user_login['email'])
+            user_obj = User(email=user_login['email'])
             login_user(user_obj)
             return redirect(url_for('dashboard'))
         
