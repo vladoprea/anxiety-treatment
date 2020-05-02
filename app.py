@@ -117,7 +117,6 @@ def help_guide():
 @app.route('/journal')
 @login_required
 def journal():
-
     return render_template('journal.html', journals=mongo.db.journals.find())
 
 
@@ -133,8 +132,6 @@ def insert_journal():
     form = JournalForm(request.form)
     journals = mongo.db.journals
     new_journal = request.form.to_dict()
-    new_journal['owner']=session['email']
-    print(new_journal)
 
     if request.method == 'POST' and form.validate():
         journals.insert_one(new_journal)
@@ -147,7 +144,6 @@ def insert_journal():
 @login_required
 def tfb_cycle():
     return render_template('tfb_cycle.html', toughts=mongo.db.toughts.find())
-
 
 @app.route('/add_tought')
 @login_required
@@ -165,7 +161,7 @@ def insert_tought():
     if request.method == 'POST' and form.validate():
         toughts.insert_one(request.form.to_dict())
         return redirect(url_for('tfb_cycle'))
-
+    
     return redirect(url_for('add_tought'))
 
 
@@ -240,7 +236,7 @@ def register():
         if user_exist is None:
             if email_exist is None:
                 hashpass = generate_password_hash(request.form["password"])
-                users.insert({'username' : request.form['username'], 'email': request.form['email'] , 'password' : hashpass})
+                users.insert({'username': request.form['username'], 'email': request.form['email'] , 'password' : hashpass, 'owner': request.form.get('username').upper()})
                 return redirect(url_for('login'))
             
             flash('That email already exists')
