@@ -103,9 +103,9 @@ def insert_journal():
                 'datetime': datetime.datetime.now().isoformat(' ', 'seconds'),
                 'title': request.form.get('title'),
                 'body': request.form.get('body')})
-            flash('Your new experience was added to journal', 'success')
+            flash('Your new experience was added to journal!', 'success')
             return redirect(url_for('journal'))
-    flash('Please require a title', 'danger')
+    flash('Please require an experience title!', 'danger')
     return redirect(url_for('add_journal'))
 
 
@@ -158,13 +158,15 @@ def edit_journal(journal_id):
 @login_required
 def update_journal(journal_id):
     journals = mongo.db.journals
-    journals.update( {'_id': ObjectId(journal_id)},
-    {
-        'title': request.form.get('title'),
-        'body': request.form.get('body')
-    })
-    flash("Your selected entry was updated", 'success')
-    return redirect(url_for('journal'))
+    if current_user.is_authenticated:
+        journals.update( {'_id': ObjectId(journal_id)},
+        {   'owner': current_user.email,
+            'datetime': datetime.datetime.now().isoformat(' ', 'seconds'),
+            'title': request.form.get('title'),
+            'body': request.form.get('body')
+        })
+        flash("Your selected entry was updated!", 'success')
+        return redirect(url_for('journal'))
 
 
 @app.route('/edit_tought/<tought_id>')
@@ -179,20 +181,21 @@ def edit_tought(tought_id):
 @login_required
 def update_tought(tought_id):
     toughts = mongo.db.toughts
-    toughts.update( {'_id': ObjectId(tought_id)},
-    {
-        'situation': request.form.get('situation'),
-        'feeling': request.form.get('feeling'),
-        'rate_feeling': request.form.get('rate_feeling'),
-        'physical': request.form.get('physical'),
-        'behaviour': request.form.get('behaviour'),
-        'evidence': request.form.get('evidence'),
-        'counter_evidence': request.form.get('counter_evidence'),
-        'alternative': request.form.get('alternative')
-
-    })
-    flash('Your selected entry was updated!', 'success')
-    return redirect(url_for('tfb_cycle'))
+    if current_user.is_authenticated:
+        toughts.update( {'_id': ObjectId(tought_id)},
+        {   
+            'owner': current_user.email,
+            'datetime': datetime.datetime.now().isoformat(' ', 'seconds'),
+            'situation': request.form.get('situation'),
+            'feeling': request.form.get('feeling'),
+            'rate_feeling': request.form.get('rate_feeling'),
+            'physical': request.form.get('physical'),
+            'behaviour': request.form.get('behaviour'),
+            'evidence': request.form.get('evidence'),
+            'counter_evidence': request.form.get('counter_evidence'),
+            'alternative': request.form.get('alternative')})
+        flash('Your selected entry was updated!', 'success')
+        return redirect(url_for('tfb_cycle'))
 
 
 @app.route('/delete_journal/<journal_id>')
