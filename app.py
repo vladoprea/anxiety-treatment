@@ -137,6 +137,7 @@ def insert_tought():
                 'rate_feeling': request.form.get('rate_feeling'),
                 'physical': request.form.get('physical'),
                 'behaviour': request.form.get('behaviour'),
+                'hot_tought': request.form.get('hot_tought'),
                 'evidence': request.form.get('evidence'),
                 'counter_evidence': request.form.get('counter_evidence'),
                 'alternative': request.form.get('alternative')})
@@ -191,6 +192,7 @@ def update_tought(tought_id):
             'rate_feeling': request.form.get('rate_feeling'),
             'physical': request.form.get('physical'),
             'behaviour': request.form.get('behaviour'),
+            'hot_tought': request.form.get('hot_tought'),
             'evidence': request.form.get('evidence'),
             'counter_evidence': request.form.get('counter_evidence'),
             'alternative': request.form.get('alternative')})
