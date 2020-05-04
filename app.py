@@ -5,6 +5,7 @@ from flask import Flask, render_template, redirect, flash, request, url_for, ses
 from flask_login import current_user, login_user, logout_user, login_required, LoginManager
 from wtforms import Form, StringField, TextAreaField, PasswordField, SelectField, HiddenField, validators
 from werkzeug.security import generate_password_hash, check_password_hash
+import datetime
 import os
 from os import path
 if path.exists("env.py"):
@@ -136,6 +137,7 @@ def insert_journal():
         if current_user.is_authenticated:
             journals.insert_one({
                 'owner': current_user.email,
+                'datetime': datetime.datetime.now().isoformat(' ', 'seconds'),
                 'title': request.form.get('title'),
                 'body': request.form.get('body')})
             return redirect(url_for('journal'))
@@ -165,6 +167,7 @@ def insert_tought():
         if current_user.is_authenticated:
             toughts.insert_one({
                 'owner': current_user.email,
+                'datetime': datetime.datetime.now().isoformat(' ', 'seconds'),
                 'situation': request.form.get('situation'),
                 'feeling': request.form.get('feeling'),
                 'rate_feeling': request.form.get('rate_feeling'),
@@ -272,12 +275,12 @@ def login():
         if user_login and User.validate_login(user_login['password'], request.form["password"]):
             user_obj = User(email=user_login['email'])
             login_user(user_obj)
-            flash('You logged in successfully')
+            flash('You logged in successfully!')
             next = request.args.get('next')
             return redirect(next or url_for('dashboard'))
         
-        flash('Username does not exist')
-        return redirect(url_for('register'))
+        flash('Email or password is wrong. Try again!')
+        return redirect(url_for('login'))
             
     return render_template('login.html', form=form)
 
