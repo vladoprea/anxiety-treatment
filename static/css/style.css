@@ -215,6 +215,9 @@ p {
     font-weight: 500;
     padding-left: 4px;
 }
+.fa-github:before {
+    color: #fff;
+}
 
 
 /*   Buttons    */
