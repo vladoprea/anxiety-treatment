@@ -162,8 +162,18 @@ def insert_tought():
     toughts = mongo.db.toughts
 
     if request.method == 'POST' and form.validate():
-        toughts.insert_one(request.form.to_dict())
-        return redirect(url_for('tfb_cycle'))
+        if current_user.is_authenticated:
+            toughts.insert_one({
+                'owner': current_user.email,
+                'situation': request.form.get('situation'),
+                'feeling': request.form.get('feeling'),
+                'rate_feeling': request.form.get('rate_feeling'),
+                'physical': request.form.get('physical'),
+                'behaviour': request.form.get('behaviour'),
+                'evidence': request.form.get('evidence'),
+                'counter_evidence': request.form.get('counter_evidence'),
+                'alternative': request.form.get('alternative')})
+            return redirect(url_for('tfb_cycle'))
     
     return redirect(url_for('add_tought'))
 
