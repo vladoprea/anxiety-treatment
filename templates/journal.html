@@ -28,7 +28,8 @@
     </div>
     <div class="row accordion-custom">
         <div class="col">
-          {% for journal in journals %}
+         {% for journal in journals %}
+          {% if current_user.email == journal.owner %}
             <div class="accordion" id="accordionExample">
               <div class="card">
                   <div class="card-header" id="heading{{journal._id}}">
@@ -51,8 +52,9 @@
                   </div>
                 </div>
               </div>
+              {% endif %}
             {% endfor %}
-        </div>
+          </div>
     </div>
   </div>
   </section>
