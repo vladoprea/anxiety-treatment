@@ -145,7 +145,18 @@ main {
     background-color: #f1f1f1;
     margin-top:10px;
     margin-bottom: 10px;
+}
 
+.card-header-journal {
+    background-color: #feceb7;
+}
+
+.card-header_toughts {
+    background-color: #ebcafe;
+}
+
+.card {
+    margin-bottom: 5px;
 }
 
 

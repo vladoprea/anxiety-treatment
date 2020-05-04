@@ -47,7 +47,7 @@
               {% if current_user.email == tought.owner %}
               <div class="accordion" id="accordionExample">
                   <div class="card">
-                    <div class="card-header" id="heading{{tought._id}}">
+                    <div class="card-header card-header_toughts" id="heading{{tought._id}}">
                       <h2 class="mb-0">
                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{tought._id}}" aria-expanded="true" aria-controls="collapse{{tought._id}}">
                           {{tought.situation}}
