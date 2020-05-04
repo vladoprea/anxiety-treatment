@@ -19,7 +19,8 @@
     {% include 'includes/_navbar.html' %}
     <!--Main content-->
     <main>
-    {% block body %} {% endblock %}
+    {% include 'includes/_messages.html' %}
+    {% block body %}{% endblock %}
     </main>
     <!--Footer-->
     {% include 'includes/_footer.html' %}

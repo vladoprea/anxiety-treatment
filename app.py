@@ -139,9 +139,9 @@ def insert_journal():
                 'datetime': datetime.datetime.now().isoformat(' ', 'seconds'),
                 'title': request.form.get('title'),
                 'body': request.form.get('body')})
-            flash('Your new experience was added to journal')
+            flash('Your new experience was added to journal', 'success')
             return redirect(url_for('journal'))
-
+    flash('Please require a title', 'danger')
     return redirect(url_for('add_journal'))
 
 
@@ -176,9 +176,9 @@ def insert_tought():
                 'evidence': request.form.get('evidence'),
                 'counter_evidence': request.form.get('counter_evidence'),
                 'alternative': request.form.get('alternative')})
-            flash('Your new TFB cycle was added!')
+            flash('Your new TFB cycle was added!', 'success')
             return redirect(url_for('tfb_cycle'))
-    
+    flash('Please require a situation short title', 'danger')
     return redirect(url_for('add_tought'))
 
 
@@ -199,7 +199,7 @@ def update_journal(journal_id):
         'title': request.form.get('title'),
         'body': request.form.get('body')
     })
-    flash("Your selected entry was updated")
+    flash("Your selected entry was updated", 'success')
     return redirect(url_for('journal'))
 
 
@@ -227,7 +227,7 @@ def update_tought(tought_id):
         'alternative': request.form.get('alternative')
 
     })
-    flash('Your selected entry was updated!')
+    flash('Your selected entry was updated!', 'success')
     return redirect(url_for('tfb_cycle'))
 
 
@@ -256,13 +256,13 @@ def register():
             if email_exist is None:
                 hashpass = generate_password_hash(request.form["password"])
                 users.insert({'username': request.form['username'], 'email': request.form['email'] , 'password' : hashpass})
-                flash('Your account was created!')
+                flash('Your account was created!', 'success')
                 return redirect(url_for('login'))
             
-            flash('That email already exists')
+            flash('That email already exists', 'danger')
             return redirect(url_for('register'))
         
-        flash('That username already exists!')
+        flash('That username already exists!', 'danger')
         return redirect(url_for('register'))
 
     return render_template('register.html', form=form)
@@ -280,10 +280,10 @@ def login():
             user_obj = User(email=user_login['email'])
             login_user(user_obj)
             next = request.args.get('next')
-            flash('You logged in successfully!')
+            flash('You logged in successfully!','success')
             return redirect(next or url_for('dashboard'))
         
-        flash('Email or password is wrong. Try again!')
+        flash('Email or password is wrong. Try again!', 'danger')
         return redirect(url_for('login'))
             
     return render_template('login.html', form=form)
@@ -291,6 +291,7 @@ def login():
 @app.route('/logout')
 def logout():
     logout_user()
+    flash('You are now logged out!', 'success')
     return redirect(url_for('home'))
 
 

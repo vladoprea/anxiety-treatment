@@ -197,6 +197,9 @@ p {
 .login-text {
     margin-top:10px;
 }
+.login-register-text {
+    color: #0000ff;
+}
 
 .def-paragraph {
     margin-top: 30px;
