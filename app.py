@@ -1,6 +1,5 @@
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
-from bson.json_util import dumps
 from flask import Flask, render_template, redirect, flash, request, url_for, session
 from flask_login import current_user, login_user, logout_user, login_required, LoginManager
 from wtforms import Form, StringField, TextAreaField, PasswordField, SelectField, HiddenField, validators
@@ -140,6 +139,7 @@ def insert_journal():
                 'datetime': datetime.datetime.now().isoformat(' ', 'seconds'),
                 'title': request.form.get('title'),
                 'body': request.form.get('body')})
+            flash('Your new experience was added to journal')
             return redirect(url_for('journal'))
 
     return redirect(url_for('add_journal'))
@@ -176,6 +176,7 @@ def insert_tought():
                 'evidence': request.form.get('evidence'),
                 'counter_evidence': request.form.get('counter_evidence'),
                 'alternative': request.form.get('alternative')})
+            flash('Your new TFB cycle was added!')
             return redirect(url_for('tfb_cycle'))
     
     return redirect(url_for('add_tought'))
@@ -198,6 +199,7 @@ def update_journal(journal_id):
         'title': request.form.get('title'),
         'body': request.form.get('body')
     })
+    flash("Your selected entry was updated")
     return redirect(url_for('journal'))
 
 
@@ -225,6 +227,7 @@ def update_tought(tought_id):
         'alternative': request.form.get('alternative')
 
     })
+    flash('Your selected entry was updated!')
     return redirect(url_for('tfb_cycle'))
 
 
@@ -253,6 +256,7 @@ def register():
             if email_exist is None:
                 hashpass = generate_password_hash(request.form["password"])
                 users.insert({'username': request.form['username'], 'email': request.form['email'] , 'password' : hashpass})
+                flash('Your account was created!')
                 return redirect(url_for('login'))
             
             flash('That email already exists')
@@ -275,8 +279,8 @@ def login():
         if user_login and User.validate_login(user_login['password'], request.form["password"]):
             user_obj = User(email=user_login['email'])
             login_user(user_obj)
-            flash('You logged in successfully!')
             next = request.args.get('next')
+            flash('You logged in successfully!')
             return redirect(next or url_for('dashboard'))
         
         flash('Email or password is wrong. Try again!')
