@@ -2,10 +2,13 @@
 
 body {
     font-family: 'Nunito Sans', sans-serif;
+    display: flex;
+    flex-direction: column;        
+    min-height: 100vh;
 }
 
 main {
-    min-height: calc( 100vh - 250px);
+    flex: 1;
 }
 
 
