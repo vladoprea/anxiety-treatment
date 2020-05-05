@@ -26,8 +26,11 @@
         <button class="btn btn-warning"><a href="{{ url_for('add_journal') }}">Add new entry</a></button>
       </div>
     </div>
+    <!--Accordion that displays users inputs-->
     <div class="row accordion-custom">
         <div class="col">
+          <!--Check if the current user email is found in the database collection and 
+            display only entries from the specific user-->
          {% for journal in journals %}
           {% if current_user.email == journal.owner %}
             <div class="accordion" id="accordionExample">

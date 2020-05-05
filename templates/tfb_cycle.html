@@ -41,8 +41,11 @@
         <button class="btn btn-warning"><a href="{{ url_for('add_tought') }}">Add new entry</a></button>
       </div>
     </div>
+    <!--Accordion that displays users inputs-->
     <div class="row">
           <div class="col">
+            <!--Check if the current user email is found in the database collection and 
+            display only entries from the specific user-->
             {% for tought in toughts %}
               {% if current_user.email == tought.owner %}
               <div class="accordion" id="accordionExample">

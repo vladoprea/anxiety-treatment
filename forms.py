@@ -1,6 +1,7 @@
 import os
 from wtforms import Form, StringField, TextAreaField, PasswordField, SelectField, HiddenField, validators
 
+#Register Form Class
 class RegisterForm(Form):
     username = StringField('Username', [validators.Length(min=4, max=25)])
     email = StringField('Email', [validators.Length(min=6, max=50)])

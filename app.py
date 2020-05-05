@@ -21,8 +21,9 @@ mongo = PyMongo(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
-class User:
 
+# User class to implement these properties and methods:
+class User:
     def __init__(self, email):
         self.email = email
 
@@ -42,6 +43,7 @@ class User:
     def validate_login(password_hash, password):
         return check_password_hash(password_hash, password)
 
+# Callback used to reload the user object from the user email stored in the session
 @login_manager.user_loader
 def load_user(email):
     users = mongo.db.users
@@ -93,9 +95,15 @@ def add_journal():
 @app.route('/insert_journal', methods=['POST'])
 @login_required
 def insert_journal():
+    """
+    Insert users input into database
+    Checks if forms validate
+    Add logged in user email to collection
+    so that the inputs to be displayed for every user separately
+    Add date and time of the post to database
+    """
     form = JournalForm(request.form)
     journals = mongo.db.journals
-    
     if request.method == 'POST' and form.validate():
         if current_user.is_authenticated:
             journals.insert_one({
@@ -105,7 +113,7 @@ def insert_journal():
                 'body': request.form.get('body')})
             flash('Your new experience was added to journal!', 'success')
             return redirect(url_for('journal'))
-    flash('Please require an experience title!', 'danger')
+
     return redirect(url_for('add_journal'))
 
 
@@ -124,6 +132,13 @@ def add_tought():
 @app.route('/insert_tought', methods=['POST'])
 @login_required
 def insert_tought():
+    """
+    Insert users input into database
+    Checks if forms validate
+    Add logged in user email to collection
+    so that the inputs to be displayed for every user separately
+    Add date and time of the post to database
+    """
     form = ToughtsForm(request.form)
     toughts = mongo.db.toughts
 
@@ -143,7 +158,7 @@ def insert_tought():
                 'alternative': request.form.get('alternative')})
             flash('Your new TFB cycle was added!', 'success')
             return redirect(url_for('tfb_cycle'))
-    flash('Please require a situation short title', 'danger')
+
     return redirect(url_for('add_tought'))
 
 
@@ -158,6 +173,10 @@ def edit_journal(journal_id):
 @app.route('/update_journal/<journal_id>', methods=["GET", "POST"])
 @login_required
 def update_journal(journal_id):
+    """
+    Get the required post to be updated
+    Update all fields besides 'owner' which it should be the same
+    """
     journals = mongo.db.journals
     if current_user.is_authenticated:
         journals.update( {'_id': ObjectId(journal_id)},
@@ -178,9 +197,14 @@ def edit_tought(tought_id):
     print(new_tought)
     return render_template('edit_tought.html', form = form, tought = new_tought)
 
+
 @app.route('/update_tought/<tought_id>', methods=["POST"])
 @login_required
 def update_tought(tought_id):
+    """
+    Get the required post to be updated
+    Update all fields besides 'owner' which it should be the same
+    """
     toughts = mongo.db.toughts
     if current_user.is_authenticated:
         toughts.update( {'_id': ObjectId(tought_id)},
@@ -199,13 +223,13 @@ def update_tought(tought_id):
         flash('Your selected entry was updated!', 'success')
         return redirect(url_for('tfb_cycle'))
 
-
+# Delete selected entry
 @app.route('/delete_journal/<journal_id>')
 def delete_journal(journal_id):
     mongo.db.journals.remove({'_id': ObjectId(journal_id)})
     return redirect(url_for('journal'))
 
-
+# Delete selected entry
 @app.route('/delete_tought/<tought_id>')
 def delete_tought(tought_id):
     mongo.db.toughts.remove({'_id': ObjectId(tought_id)})
@@ -215,6 +239,12 @@ def delete_tought(tought_id):
 #User Register
 @app.route('/register' , methods=['GET', 'POST'])
 def register():
+    """
+    Check if the username and email already exists. 
+    If yes, en error will be shown 
+    If all validations pass, the password is hashed 
+    then all details introduced to database
+    """
     form = RegisterForm()
     if request.method == 'POST':
         users = mongo.db.users
@@ -239,6 +269,11 @@ def register():
 #User Login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    """
+    Login and validate the user. Check if the email exists in database 
+    and if the passwords introduced matches the one from DB.
+    user is an instance of the `User` class.
+    """
     form = LoginForm(request.form)
 
     if request.method == 'POST':
@@ -257,6 +292,7 @@ def login():
             
     return render_template('login.html', form=form)
 
+#User logout
 @app.route('/logout')
 def logout():
     logout_user()
