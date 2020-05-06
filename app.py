@@ -4,12 +4,15 @@ from flask import Flask, render_template, redirect, flash, request, url_for, ses
 from flask_login import current_user, login_user, logout_user, login_required, LoginManager
 from werkzeug.security import generate_password_hash, check_password_hash
 from forms import RegisterForm, LoginForm, JournalForm, ToughtsForm
+from flask_wtf.csrf import CSRFProtect
 import datetime 
 import os
 from os import path
 if path.exists("env.py"):
     import env
 
+
+csrf = CSRFProtect()
 
 app = Flask(__name__)
 
@@ -20,6 +23,8 @@ app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 mongo = PyMongo(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
+
+csrf.init_app(app)
 
 
 # User class to implement these properties and methods, used in login:
@@ -104,7 +109,7 @@ def insert_journal():
     """
     form = JournalForm(request.form)
     journals = mongo.db.journals
-    if request.method == 'POST' and form.validate():
+    if form.validate_on_submit():
         if current_user.is_authenticated:
             journals.insert_one({
                 'owner': current_user.email,
@@ -142,7 +147,7 @@ def insert_tought():
     form = ToughtsForm(request.form)
     toughts = mongo.db.toughts
 
-    if request.method == 'POST' and form.validate():
+    if form.validate_on_submit():
         if current_user.is_authenticated:
             toughts.insert_one({
                 'owner': current_user.email,
@@ -246,7 +251,7 @@ def register():
     then all details introduced to database
     """
     form = RegisterForm()
-    if request.method == 'POST':
+    if form.validate_on_submit():
         users = mongo.db.users
         user_exist = users.find_one({'username' : request.form['username']})
         email_exist = users.find_one({'email': request.form['email']})
