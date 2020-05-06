@@ -129,10 +129,16 @@ Manual testing was made on several small, medium and large devices. With help fr
 #### Journal and TFB Cycle
 
 * Add new entry button opens a form where user can introduce data. Pressing add entry redirects to journal page where the new indroduced entry is displayed as accordion. Date and time is also displayed. Accordion functions correctly.
-* Edit buttons open a form prepopulated with the selected entry data. It works properly
+* Edit buttons open a form prepopulated with the selected entry data. All fields work properly besides textarea fields, an error that is detailed in Error chapter below.
 * Delete buttons erase the entry and it works properly.
 
 ### Errors
+
+* A major error and inconvienent for the user is in the Edit form. Textarea fields are being prepopulated with placeholder content of the selected entry. When trying to edit, the whole text disapears. The error comes from here in 'edit_tought.html':
+
+```html
+{{ form.hidden_tag() }} {{ render_field(form.body, class="form-control", placeholder=journal.body) }}```
+I haven't found a better solution to prepopulate TextAreaFields. This causes major inconvienent for the user.
 
 ## Deployment
 
