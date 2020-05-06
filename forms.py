@@ -21,12 +21,12 @@ class LoginForm(FlaskForm):
 
 #Journal Entry Class
 class JournalForm(FlaskForm):
-    title = StringField('Title', validators = [Length(min=4)])
+    title = StringField('Title', validators = [Length(min=4, max=50)])
     body = TextAreaField('Description')
 
 #TFB Cycle Entry Class
 class ToughtsForm(FlaskForm):
-    situation = StringField('Situation', validators = [Length(min=4)])
+    situation = StringField('Situation', validators = [Length(min=4, max=50)])
     feeling = StringField('Feeling')
     rate_feeling = SelectField(u'Rate Feeling', choices = [('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'), ('7', '7'), ('8', '8'), ('9', '9'), ('10', '10')])
     physical = StringField('Physical Reaction')
