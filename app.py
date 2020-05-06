@@ -1,7 +1,9 @@
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
-from flask import Flask, render_template, redirect, flash, request, url_for, session
-from flask_login import current_user, login_user, logout_user, login_required, LoginManager
+from flask import (Flask, render_template, redirect, 
+                    flash, request, url_for, session)
+from flask_login import (current_user, login_user,
+                     logout_user, login_required, LoginManager)
 from werkzeug.security import generate_password_hash, check_password_hash
 from forms import RegisterForm, LoginForm, JournalForm, ToughtsForm
 from flask_wtf.csrf import CSRFProtect
@@ -48,6 +50,7 @@ class User:
     def validate_login(password_hash, password):
         return check_password_hash(password_hash, password)
 
+
 # Callback used to reload the user object from the user email stored in the session
 @login_manager.user_loader
 def load_user(email):
@@ -63,6 +66,7 @@ def home():
     if current_user.is_authenticated:
         return render_template('dashboard.html')
     return render_template('home.html')
+
 
 @app.route('/dashboard')
 @login_required
@@ -97,6 +101,7 @@ def add_journal():
     form = JournalForm()
     return render_template('add_journal.html', form=form)
 
+
 @app.route('/insert_journal', methods=['POST'])
 @login_required
 def insert_journal():
@@ -127,10 +132,11 @@ def insert_journal():
 def tfb_cycle():
     return render_template('tfb_cycle.html', toughts=mongo.db.toughts.find())
 
+
 @app.route('/add_tought')
 @login_required
 def add_tought():
-    form =ToughtsForm()
+    form = ToughtsForm()
     return render_template('add_tought.html', form=form)
 
 
@@ -173,7 +179,8 @@ def edit_journal(journal_id):
     new_journal = mongo.db.journals.find_one({"_id": ObjectId(journal_id)})
     form = JournalForm()
     print(new_journal)
-    return render_template('edit_journal.html', form = form, journal = new_journal)
+    return render_template('edit_journal.html', form=form, journal=new_journal)
+
 
 @app.route('/update_journal/<journal_id>', methods=["GET", "POST"])
 @login_required
@@ -184,12 +191,11 @@ def update_journal(journal_id):
     """
     journals = mongo.db.journals
     if current_user.is_authenticated:
-        journals.update( {'_id': ObjectId(journal_id)},
-        {   'owner': current_user.email,
+        journals.update({'_id': ObjectId(journal_id)},
+           {'owner': current_user.email,
             'datetime': datetime.datetime.now().isoformat(' ', 'seconds'),
             'title': request.form.get('title'),
-            'body': request.form.get('body')
-        })
+            'body': request.form.get('body')})
         flash("Your selected entry was updated!", 'success')
         return redirect(url_for('journal'))
 
@@ -200,7 +206,7 @@ def edit_tought(tought_id):
     new_tought = mongo.db.toughts.find_one({"_id": ObjectId(tought_id)})
     form = ToughtsForm()
     print(new_tought)
-    return render_template('edit_tought.html', form = form, tought = new_tought)
+    return render_template('edit_tought.html', form=form, tought=new_tought)
 
 
 @app.route('/update_tought/<tought_id>', methods=["POST"])
@@ -212,9 +218,8 @@ def update_tought(tought_id):
     """
     toughts = mongo.db.toughts
     if current_user.is_authenticated:
-        toughts.update( {'_id': ObjectId(tought_id)},
-        {   
-            'owner': current_user.email,
+        toughts.update({'_id': ObjectId(tought_id)},
+           {'owner': current_user.email,
             'datetime': datetime.datetime.now().isoformat(' ', 'seconds'),
             'situation': request.form.get('situation'),
             'feeling': request.form.get('feeling'),
@@ -228,11 +233,13 @@ def update_tought(tought_id):
         flash('Your selected entry was updated!', 'success')
         return redirect(url_for('tfb_cycle'))
 
+
 # Delete selected entry
 @app.route('/delete_journal/<journal_id>')
 def delete_journal(journal_id):
     mongo.db.journals.remove({'_id': ObjectId(journal_id)})
     return redirect(url_for('journal'))
+
 
 # Delete selected entry
 @app.route('/delete_tought/<tought_id>')
@@ -241,8 +248,8 @@ def delete_tought(tought_id):
     return redirect(url_for('tfb_cycle'))
 
 
-#User Register
-@app.route('/register' , methods=['GET', 'POST'])
+# User Register
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     """
     Check if the username and email already exists. 
@@ -253,25 +260,23 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         users = mongo.db.users
-        user_exist = users.find_one({'username' : request.form['username']})
+        user_exist = users.find_one({'username': request.form['username']})
         email_exist = users.find_one({'email': request.form['email']})
 
         if user_exist is None:
             if email_exist is None:
                 hashpass = generate_password_hash(request.form["password"])
-                users.insert({'username': request.form['username'], 'email': request.form['email'] , 'password' : hashpass})
+                users.insert({'username': request.form['username'], 'email': request.form['email'], 'password': hashpass})
                 flash('Your account was created!', 'success')
                 return redirect(url_for('login'))
-            
             flash('That email already exists', 'danger')
             return redirect(url_for('register'))
-        
         flash('That username already exists!', 'danger')
         return redirect(url_for('register'))
-
     return render_template('register.html', form=form)
 
-#User Login
+
+# User Login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     """
@@ -289,15 +294,14 @@ def login():
             user_obj = User(email=user_login['email'])
             login_user(user_obj)
             next = request.args.get('next')
-            flash('You logged in successfully!','success')
+            flash('You logged in successfully!', 'success')
             return redirect(next or url_for('dashboard'))
-        
         flash('Email or password is wrong. Try again!', 'danger')
         return redirect(url_for('login'))
-            
     return render_template('login.html', form=form)
 
-#User logout
+
+# User logout
 @app.route('/logout')
 def logout():
     logout_user()
