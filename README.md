@@ -47,7 +47,7 @@ Navbar has different buttons for general access(without account) and for logged 
 
 #### General access
 
-* Home - access to the first page
+* Home - access to the first page. On this page there are 2 available articles with their own links: Symptoms and Treatment.
 * Register - opens register form
 * Login - opens login form
 * Help guide - opens Help Guide page
