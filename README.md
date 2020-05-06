@@ -113,6 +113,8 @@ This project was only tested manually on a range of devices and browsers. During
 
 ### Manual Testing
 
+*[Pep8 Check](http://pep8online.com/)
+
 Manual testing was made on several small, medium and large devices. With help from some friends, 7 accounts were created and checked the functionality of the site.
 
 #### Register
@@ -137,8 +139,13 @@ Manual testing was made on several small, medium and large devices. With help fr
 * A major error and inconvienent for the user is in the Edit form. Textarea fields are being prepopulated with placeholder content of the selected entry. When trying to edit, the whole text disapears. The error comes from here in 'edit_tought.html':
 
 ```html
-{{ form.hidden_tag() }} {{ render_field(form.body, class="form-control", placeholder=journal.body) }}```
+{{ form.hidden_tag() }} {{ render_field(form.body, class="form-control", placeholder=journal.body) }}
+```
+
 I haven't found a better solution to prepopulate TextAreaFields. This causes major inconvienent for the user.
+
+* Add journal and add tought forms doesn't display validation errors when mandatory fields are not filled. This confuses the user as he is not aware of what he's done wrong.
+* White space between Success message after logout and jumbotron on all devices.
 
 ## Deployment
 
