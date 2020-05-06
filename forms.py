@@ -7,21 +7,20 @@ from wtforms.validators import DataRequired, EqualTo
 class RegisterForm(Form):
     username = StringField('Username', [validators.Length(min=4, max=25)])
     email = StringField('Email', [validators.Length(min=6, max=50)])
-    password = PasswordField('Password', validators=[DataRequired('Choose a Password')])
-    confirm = PasswordField('Confirm Password', validators=[
-                            DataRequired('Please re-type your Password'), EqualTo('password')])
+    password = PasswordField('Password', [
+        validators.DataRequired(),
+        validators.EqualTo('confirm', message='Passwords must match')
+    ])
+    confirm = PasswordField('Confirm Password')
 
 #Login Form Class
 class LoginForm(Form):
     username = StringField('Username', [validators.Length(min=4, max=25)])
-    password = PasswordField('Password', [
-        validators.DataRequired(),
-        validators.EqualTo('confirm', message='Passwords do not match')
-    ])
+    password = PasswordField('Password', validators=[DataRequired()])
 
 #Journal Entry Class
 class JournalForm(Form):
-    title = StringField('Title', [validators.Length(min=3, max=100)])
+    title = StringField('Title', [validators.Length(min=10, max=100)])
     body = TextAreaField('Description')
 
 #TFB Cycle Entry Class
