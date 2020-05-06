@@ -1,15 +1,15 @@
 import os
-from wtforms import Form, StringField, TextAreaField, PasswordField, SelectField, HiddenField, validators
+from wtforms import Form, StringField, TextAreaField, PasswordField, SelectField, validators
+from wtforms.validators import DataRequired, EqualTo
+
 
 #Register Form Class
 class RegisterForm(Form):
     username = StringField('Username', [validators.Length(min=4, max=25)])
     email = StringField('Email', [validators.Length(min=6, max=50)])
-    password = PasswordField('Password', [
-        validators.DataRequired(),
-        validators.EqualTo('confirm', message='Passwords do not match')
-    ])
-    confirm = PasswordField('Confirm Password')
+    password = PasswordField('Password', validators=[DataRequired('Choose a Password')])
+    confirm = PasswordField('Confirm Password', validators=[
+                            DataRequired('Please re-type your Password'), EqualTo('password')])
 
 #Login Form Class
 class LoginForm(Form):
