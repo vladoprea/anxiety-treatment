@@ -1,10 +1,10 @@
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
-from forms import *
 from flask import Flask, render_template, redirect, flash, request, url_for, session
 from flask_login import current_user, login_user, logout_user, login_required, LoginManager
 from werkzeug.security import generate_password_hash, check_password_hash
-import datetime
+from forms import RegisterForm, LoginForm, JournalForm, ToughtsForm
+import datetime 
 import os
 from os import path
 if path.exists("env.py"):
@@ -22,7 +22,7 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
 
-# User class to implement these properties and methods:
+# User class to implement these properties and methods, used in login:
 class User:
     def __init__(self, email):
         self.email = email
