@@ -1,7 +1,7 @@
 # Anxiety treatment
 
 Anxiety disorder is a condition that became widely spread in the world in the last years. This site comes as a help for those who struggle with moderate anxiety and don't require medical treatment. Its content, features and tools are inspired from Cognitive Behavioural Therapy(CBT), a method successfully used in psychoterapy.
-The deployed site can be accessed here: <http://anxiety-treatment.herokuapp.com/treatment>
+The deployed site can be accessed here: <https://anxiety-treatment.herokuapp.com/>
 
 ## User Experience(UX)
 
@@ -164,6 +164,8 @@ This project was developed using Visual Studio Code, Python, and Git, committed 
 9. After the application is built, select Settings from the top of the page.
 10. Select Reveal Config Vars.
 11. Add your config keys for IP, PORT, MONGO_URI, MONGO_DBNAME, and SECRET_KEY.
+
+The deployed site can be accessed here: <https://anxiety-treatment.herokuapp.com/>
 
 ## Credits
 
